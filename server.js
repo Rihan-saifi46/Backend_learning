@@ -1,7 +1,7 @@
 const express = require("express")
 
 const app = express()
-const Router = require("./Auth-Router/Router");
+const Router = require("./server/Router/Auth-Router");
 
 app.use("/api/auth",Router)
 
