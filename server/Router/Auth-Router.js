@@ -5,6 +5,6 @@ const {Home,Register} = require("../Controller/auth-controller")
 
 Router.route("/").get(Home)
 
-Router.route("/about").get(Register)
+Router.route("/rr").post(Register)
 
 module.exports = Router;
