@@ -33,7 +33,7 @@ const Register = async (req,res) => {
         phone,
         pass})
 
-        res.status(201).json({msg:userCreated})
+        res.status(201).json({msg:userCreated,token:await userCreated.generateToken()})
     } catch (error) {
         res.status(400).send("INTERNAL ERROR PAGE")
     }
