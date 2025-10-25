@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const Bcrypt = require("bcryptjs")
 
 const userSchema = new mongoose.Schema({
     username:{
@@ -23,8 +24,23 @@ const userSchema = new mongoose.Schema({
     },
 })
 // pass hass krne ka dusra trika 
-userSchema.pre('save',function(){
-  console.log("pre method",this); 
+userSchema.pre('save',async function(next){
+//   console.log("pre method",this);
+   const user = this;
+  
+  if(!user.isModified("pass")){
+    next();
+  }
+  try {
+    const saltRound = await Bcrypt.genSalt(10);
+    const hash_pass = await Bcrypt.hash(user.pass,saltRound)
+    user.pass = hash_pass
+  } catch (error) {
+     next
+     (error);
+  }
+
+
 })
 
 const User1 = new mongoose.model("User1",userSchema);
