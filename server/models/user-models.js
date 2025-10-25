@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
         default:false
     },
 })
+// pass hass krne ka dusra trika 
+userSchema.pre('save',function(){
+  console.log("pre method",this); 
+})
 
 const User1 = new mongoose.model("User1",userSchema);
 module.exports = User1;

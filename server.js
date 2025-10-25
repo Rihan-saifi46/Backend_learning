@@ -1,7 +1,10 @@
-const express = require("express")
-
-const app = express()
+// require("dotenv").config();
+const express = require("express");
+const app = express();
 const Router = require("./server/Router/Auth-Router");
+const connect = require("./server/Utils/Db");
+
+app.use(express.json())
 
 app.use("/api/auth",Router)
 
@@ -15,6 +18,9 @@ app.use("/api/auth",Router)
 
 const PORT = 4500;
 
+
+connect().then(()=>{
 app.listen(PORT,() => {
     console.log(`server is running on port ${PORT}`);
+})
 })
